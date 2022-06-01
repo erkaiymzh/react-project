@@ -1,30 +1,23 @@
 {
   "products": [
     {
-      "title": "sdf",
-      "description": "sdkfn",
-      "price": "ksdnf",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYtfZRhbGQtq2BapB2MXJfWIO2QriO5Wx3qQ&usqp=CAU",
-      "id": 1
-    },
-    {
-      "title": "dsk;fm",
-      "description": "sd;lfm",
-      "price": "sldmf",
+      "title": "Product ",
+      "description": "hello world",
+      "price": "1980700",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYtfZRhbGQtq2BapB2MXJfWIO2QriO5Wx3qQ&usqp=CAU",
       "id": 2
     },
     {
       "title": "dsk;fm",
-      "description": "sd;lfm",
-      "price": "sldmf",
+      "description": "lorem100  ",
+      "price": "9000",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYtfZRhbGQtq2BapB2MXJfWIO2QriO5Wx3qQ&usqp=CAU",
       "id": 3
     },
     {
       "title": "dsk;fm",
       "description": "sd;lfm",
-      "price": "sldmf",
+      "price": "1077",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYtfZRhbGQtq2BapB2MXJfWIO2QriO5Wx3qQ&usqp=CAU",
       "id": 4
     }
