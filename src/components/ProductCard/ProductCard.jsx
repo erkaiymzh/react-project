@@ -6,17 +6,20 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { productsContext } from "../../contexts/productsContext";
+import { cartContext } from "../../contexts/cartContext";
 
 const ProductCard = ({ item }) => {
   const navigate = useNavigate();
   const { deleteProduct } = useContext(productsContext);
+  const { addProductToCart, checkProductInCart } = useContext(cartContext);
+  const [checkProduct, setCheckProduct] = useState(checkProductInCart(item));
   return (
     <Card sx={{ maxWidth: 300, margin: "10px" }}>
       <CardMedia
@@ -47,8 +50,16 @@ const ProductCard = ({ item }) => {
           onClick={() => navigate(`/products/edit/${item.id}`)}>
           <EditIcon />
         </Button>
-        <Button size="small">
-          <AddShoppingCartIcon />
+        <Button
+          onClick={() => {
+            addProductToCart(item);
+            setCheckProduct(checkProductInCart(item));
+          }}
+          size="small">
+          <AddShoppingCartIcon
+            color={checkProduct ? "secondary" : "primary"}
+            // style={{ color: checkProduct ? "red" : "blue" }} // использовали условный рендеринг
+          />
         </Button>
         <Button size="small" onClick={() => navigate(`/products/${item.id}`)}>
           <MoreHorizIcon />

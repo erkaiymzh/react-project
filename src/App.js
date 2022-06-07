@@ -5,14 +5,17 @@ import Routing from "./Routing";
 import "./App.css";
 import ProductsContextProvider from "./contexts/productsContext";
 import AuthContextProvider from "./contexts/authContext";
+import CartContextProvider from "./contexts/cartContext";
 
 function App() {
   return (
     <AuthContextProvider>
       <ProductsContextProvider>
-        <Header />
-        <Routing />
-        <Footer />
+        <CartContextProvider>
+          <Header />
+          <Routing />
+          <Footer />
+        </CartContextProvider>
       </ProductsContextProvider>
     </AuthContextProvider>
   );
