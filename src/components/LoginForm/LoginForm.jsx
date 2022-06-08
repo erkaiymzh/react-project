@@ -54,6 +54,17 @@ const LoginForm = () => {
         variant="contained">
         Login
       </Button>
+      <Typography variant="p" component="h2">
+        Still no account?
+      </Typography>
+      <Typography
+        onClick={() => navi("/register")}
+        variant="p"
+        color={"primary"}
+        component="h2"
+        style={{ cursor: "pointer" }}>
+        Sign up
+      </Typography>
     </Box>
   );
 };

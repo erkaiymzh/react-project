@@ -12,9 +12,10 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import HomeIcon from "@mui/icons-material/Home";
 import { authContext } from "../../contexts/authContext";
 // import { Link } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { cartContext } from "../../contexts/cartContext";
 
@@ -25,6 +26,7 @@ export default function PrimarySearchAppBar() {
   React.useEffect(() => {
     getCart();
   }, []);
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -143,20 +145,28 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
           <Typography
-            variant="h6"
+            onClick={() => navigate("/")}
+            variant="h7"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}>
-            MUI
+            sx={{ display: { xs: "none", sm: "block" } }}
+            marginRight={"30px"}
+            style={{ cursor: "pointer" }}>
+            {/* <IconButton>
+              <HomeIcon />
+            </IconButton> */}
+            Home
+          </Typography>
+          <Typography
+            onClick={() => navigate("/products")}
+            variant="h7"
+            noWrap
+            component="div"
+            sx={{ display: { xs: "none", sm: "block" } }}
+            marginRight={"30px"}
+            style={{ cursor: "pointer" }}>
+            Products
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />

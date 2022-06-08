@@ -53,6 +53,17 @@ const RegisterForm = () => {
         variant="contained">
         Register
       </Button>
+      <Typography variant="p" component="h2">
+        Already have an account?
+      </Typography>
+      <Typography
+        onClick={() => navigate("/login")}
+        variant="p"
+        color={"primary"}
+        component="h2"
+        style={{ cursor: "pointer" }}>
+        Sign in
+      </Typography>
     </Box>
   );
 };
