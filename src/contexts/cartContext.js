@@ -4,7 +4,7 @@ export const cartContext = React.createContext();
 
 const INIT_STATE = {
   //1
-  cart: [],
+  cart: null,
   count: 0,
 };
 
@@ -12,7 +12,11 @@ function reducer(state = INIT_STATE, action) {
   //2
   switch (action.type) {
     case "GET_CART":
-      return { ...state, cart: action.payload };
+      return {
+        ...state,
+        cart: action.payload,
+        count: action.payload.products.length,
+      };
     default:
       return state;
   }
@@ -45,6 +49,7 @@ const CartContextProvider = ({ children }) => {
       cart.products.push(newProduct); //здесь добавили продукт в корзину
     }
     localStorage.setItem("cart", JSON.stringify(cart));
+    getCart();
     // console.log(cart);
     // console.log(product);
   }
@@ -63,8 +68,30 @@ const CartContextProvider = ({ children }) => {
     );
     return isProductInCart;
   }
+  function getCart() {
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    if (!cart) {
+      cart = {
+        //корзина является объектом
+        products: [],
+        totalPrice: 0,
+      };
+    }
+    dispatch({
+      type: "GET_CART",
+      payload: cart,
+    });
+  }
+  // console.log(state.count);
   return (
-    <cartContext.Provider value={{ addProductToCart, checkProductInCart }}>
+    <cartContext.Provider
+      value={{
+        cart: state.cart,
+        count: state.count,
+        addProductToCart,
+        checkProductInCart,
+        getCart,
+      }}>
       {children}
     </cartContext.Provider>
   );
