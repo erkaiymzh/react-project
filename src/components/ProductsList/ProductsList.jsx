@@ -1,12 +1,15 @@
 import { Box, Button, Container, Pagination } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { authContext } from "../../contexts/authContext";
 import { productsContext } from "../../contexts/productsContext";
 import Filters from "../Filters/Filters";
 import ProductCard from "../ProductCard/ProductCard";
 
 const ProductsList = () => {
   const { getProducts, products, pages } = useContext(productsContext);
+  const { isAdmin } = useContext(authContext);
+
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState(
@@ -33,12 +36,14 @@ const ProductsList = () => {
   //   console.log(window.location.search);
   return (
     <Container>
-      <Button
-        variant="outlined"
-        style={{ margin: "30px" }}
-        onClick={() => navigate("/add-product")}>
-        Add product
-      </Button>
+      {isAdmin ? (
+        <Button
+          variant="outlined"
+          style={{ margin: "30px" }}
+          onClick={() => navigate("/add-product")}>
+          Add product
+        </Button>
+      ) : null}
 
       <Filters
         search={search}
@@ -54,7 +59,7 @@ const ProductsList = () => {
       <Box display={"flex"} justifyContent={"center"}>
         <Pagination
           page={page}
-          count={pages}
+          count={isNaN(pages) ? 0 : pages}
           variant="outlined"
           shape="rounded"
           onChange={(e, value) => setPage(value)}

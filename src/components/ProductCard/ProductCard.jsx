@@ -14,12 +14,15 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { productsContext } from "../../contexts/productsContext";
 import { cartContext } from "../../contexts/cartContext";
+import { authContext } from "../../contexts/authContext";
 
 const ProductCard = ({ item }) => {
   const navigate = useNavigate();
   const { deleteProduct } = useContext(productsContext);
   const { addProductToCart, checkProductInCart } = useContext(cartContext);
   const [checkProduct, setCheckProduct] = useState(checkProductInCart(item));
+  const { isAdmin } = useContext(authContext);
+
   return (
     <Card sx={{ maxWidth: 300, margin: "10px" }}>
       <CardMedia
@@ -42,14 +45,19 @@ const ProductCard = ({ item }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => deleteProduct(item.id)}>
-          <DeleteIcon />
-        </Button>
-        <Button
-          size="small"
-          onClick={() => navigate(`/products/edit/${item.id}`)}>
-          <EditIcon />
-        </Button>
+        {isAdmin ? (
+          <>
+            <Button size="small" onClick={() => deleteProduct(item.id)}>
+              <DeleteIcon />
+            </Button>
+            <Button
+              size="small"
+              onClick={() => navigate(`/products/edit/${item.id}`)}>
+              <EditIcon />
+            </Button>
+          </>
+        ) : null}
+
         <Button
           onClick={() => {
             addProductToCart(item);
